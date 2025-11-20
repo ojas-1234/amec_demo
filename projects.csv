@@ -1,0 +1,11 @@
+project_id,title,task_number,lead_org,theme,budget_$,spend_to_date_$,schedule_status,tech_risk,impact_potential,doe_deliverables_status,notes,decision,failure_risk_score
+P001,Wave-Powered Pump Prototype,9.4,UNH,Blue Economy,850000,720000,At Risk,Medium,Medium,Behind,Repeated tank testing failures; redesign in progress | Wave-Powered Pump Prototype project is facing repeated tank testing failures; redesign is in progress. Schedule is at risk and DOE deliverables are behind. Recommend reshaping project focus to address technical challenges and testing failures.,Reshape,7.0
+P002,Tidal Turbine Test Site Upgrade,4.2,UNH,Tidal,1200000,900000,Delayed,High,High,On Track,"NEPA delays; new sonar & load pins acquired | Despite NEPA delays, acquisition of new sonar and load pins supports progress. Recommend continuing with mitigation of permitting delays and focus on high-impact outcomes.",Continue,6.0
+P003,Digital Twin for WEC Controls,6.3,Stony Brook,Wave,450000,200000,On Track,Medium,High,On Track,Requires integration with new CFD model | Integration with new CFD model required; moderate technical risk present but project on track. Risk rated as moderate (5) reflecting integration challenges. | Decision updated to continue given current on-track status and high impact potential; monitor CFD integration risks carefully.,Continue,5.0
+P004,Material Corrosion & Biofouling Study,7.1,Lehigh University,Crosscutting,300000,150000,On Track,Low,Medium,On Track,Standard quarterly deliverables,,
+P005,Marine Energy Microgrid Storage Study,5.2,CSI,Storage,500000,480000,At Risk,Medium,High,Behind,Vendor delays; not enough field data,,
+P006,Supply Chain Cost Model for MHK Devices,3.1,NREL,Economics,250000,80000,On Track,Low,High,On Track,Supports national guidance on MHK scaling,,
+P007,Acoustic Monitoring for Fish Interactions,8.2,PNNL,Environmental,600000,400000,On Track,Medium,Medium,On Track,First field tests successful,,
+P008,Memorial Bridge Turbine Refurbishment,4.1,UNH,Tidal,900000,910000,Over Budget,High,Medium,Behind,Structural inspection issues discovered,,
+P009,High-Resolution Bathymetry Modelling,2.3,ODE,Data,320000,160000,On Track,Low,High,On Track,Supports site characterization framework,,
+P010,Community Workforce Training Program,10.1,CSU,Workforce,150000,90000,On Track,Low,Medium,On Track,Early success; high community turnout,,

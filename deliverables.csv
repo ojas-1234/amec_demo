@@ -1,0 +1,9 @@
+deliverable_id,project_id,deliverable_type,due_date,status,summary
+D001,P001,Quarterly Progress Summary,2025-09-30,Behind,Requires integration of new RAO test results and leak mitigation updates
+D002,P002,Field-Test Readiness Report,2025-10-15,On Track,Load pin calibration and sonar imaging procurement complete
+D003,P003,Digital Twin Validation Experiment,2025-08-01,On Track,CFD simulations matched 80 percent of tank test conditions
+D004,P005,Microgrid Storage Cost Analysis,2025-09-10,Behind,Vendor did not ship battery modules for field integration
+D005,P007,Environmental Acoustic Summary,2025-07-20,On Track,No harmful fish interactions observed in first deployment
+D006,P008,Refurbishment Inspection Memo,2025-09-01,Behind,Cracks discovered in turbine mounting frame
+D007,P009,Bathymetry Dataset Release,2025-07-31,On Track,Processed and validated; upload to MHKDR pending
+D008,P010,Training Program Report,2025-08-30,On Track,Enrollment exceeded targets with high satisfaction

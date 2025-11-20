@@ -1,0 +1,6 @@
+site_id,location,resource_type,mean_wave_height_m,mean_tidal_speed_mps,permitting_complexity,grid_distance_km,seabed_type,impact_potential,notes,suitability_score,recommendation
+S001,Portsmouth NH,Tidal,0.5,2.4,High,3,Rocky,High,Primary UNH testbed with strong tidal flows | High resource availability but permitting complexity requires thorough planning,8.0,Proceed with caution
+S002,Hatteras NC,Wave,2.1,0.9,Medium,25,Sandy,Medium,Good wave climate but fragile shoreline ecology,,
+S003,Coos Bay OR,Wave,2.8,0.7,Medium,40,Mixed,High,Excellent wave resource; storms increase mooring cost,,
+S004,Pentland Firth (Mock),Tidal,0.6,3.5,High,12,Rocky,Very High,One of the world’s strongest tidal sites,,
+S005,Isles of Shoals,Wave,1.4,0.4,Low,6,Rocky,Medium,Low permitting risk; small wave resource,,
