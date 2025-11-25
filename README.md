@@ -1,4 +1,4 @@
-# 🌊 AMEC Control Center — Agentic Dashboard
+#  AMEC Control Center — Agentic Dashboard
 
 The **AMEC Control Center** is an AI-powered decision-support dashboard for the Atlantic Marine Energy Center.  
 It uses **OpenAI tool calling**, **Streamlit**, and structured CSV datasets to evaluate:
