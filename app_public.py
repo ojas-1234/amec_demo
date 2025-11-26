@@ -17,7 +17,13 @@ from openai import OpenAI
 # ---------- CONFIG ----------
 
 MODEL = "gpt-4.1-mini"
-client = OpenAI(api_key="")
+def get_api_key():
+    try:
+        return st.secrets["OPENAI_API_KEY"]
+    except (KeyError, FileNotFoundError):
+        return os.environ.get("OPENAI_API_KEY", "")
+
+client = OpenAI(api_key=get_api_key())
 
 PROJECTS_CSV = "projects.csv"
 SITES_CSV = "sites.csv"
