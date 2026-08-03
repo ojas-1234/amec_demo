@@ -1,155 +1,40 @@
-#  AMEC Control Center — Agentic Dashboard
+# AMEC Control Center — Agentic Portfolio Dashboard
 
-The **AMEC Control Center** is an AI-powered decision-support dashboard for the Atlantic Marine Energy Center.  
-It uses **OpenAI tool calling**, **Streamlit**, and structured CSV datasets to evaluate:
+A decision-support dashboard for a marine-energy R&D portfolio. You give it a plain-English command; an LLM figures out which projects, sites, or deliverables to update, executes the change through function-calling tools, and writes back a short DOE/RPPR-style summary of what changed and why.
 
-- Site failure risk  
-- Site suitability  
-- Deliverable delays  
-- Project status  
-- Portfolio-level operational decisions  
+Built as a client demo. The data is **synthetic**, modeled on the structure of an Atlantic Marine Energy Center (AMEC) DOE award — it is illustrative, not real program data.
 
-Everything is driven through **natural language**, and the AMEC Agent automatically chooses and executes the correct analytical tool based on the user's query.
+[FILL: screenshot or demo GIF — typing a command like "mark which projects should be killed, reshaped, or continued" and watching the tables + summary update]
 
----
+## What it does
 
-## 🚀 Features
+The dashboard tracks three linked tables — **projects**, candidate **sites**, and DOE **deliverables** — backed by CSV files. Instead of editing rows by hand, you describe the outcome you want:
 
-### ✅ Natural Language Interface  
-Ask questions like:
-> “Which site is riskiest?”
+> "Evaluate all projects and mark which should be killed, reshaped, or continued."
 
-The AMEC Brain automatically invokes the necessary tool.
+The agent decides which records the request affects, calls the right tool to update them (status, decision, risk/suitability score, appended notes), saves the change back to CSV, and returns a concise narrative summary in the tone of a DOE deliverable.
 
-### ✅ Agentic Tool Execution  
-Three Python tools operate on the CSV data:
+## How it works / tech stack
 
-1. **evaluate_failure_risk(site_id)**  
-2. **evaluate_site_suitability(site_id)**  
-3. **check_deliverable_risk(project_id)**  
+- **Python + Streamlit** for the UI (natural-language command box, plus tabs showing the live Projects / Sites / Deliverables tables).
+- **OpenAI Chat Completions with function calling** (`gpt-4.1-mini`) as the orchestration layer.
+- Three tools operate on **pandas** DataFrames and persist to CSV:
+  - `update_project` — status, decision, `failure_risk_score`, notes
+  - `update_site` — `suitability_score`, recommendation, notes
+  - `update_deliverable` — status, `risk_score`, notes
+- The current contents of all three tables are injected into the model's context each turn, so it only references IDs that actually exist. IDs are matched case-insensitively, and notes are appended rather than overwritten.
+- A two-step tool loop: the model requests tool calls → tools run and return results → the model produces the final human-readable summary.
 
-These tools read from:
-- `projects.csv`  
-- `sites.csv`  
-- `deliverables.csv`
+## Running it locally
 
-### ✅ DOE/RPPR-style Summaries  
-The AI generates structured, DOE-appropriate narrative summaries when relevant.
-
-### ✅ Dashboard UI (Streamlit)  
-A clean UI for:
-- Query input  
-- Tool output  
-- Debug messages (optional)  
-
----
-
-## 📦 Installation & Setup
-
-### 1. Project Structure
-
-```
-amec_dashboard/
-│ app.py
-│ projects.csv
-│ sites.csv
-│ deliverables.csv
-```
-
----
-
-### 2. Install Dependencies
-
-Run in terminal:
+`app_public.py` is the shareable version — it reads the API key from `st.secrets` or the `OPENAI_API_KEY` environment variable.
 
 ```bash
-pip install streamlit openai pandas python-dotenv
+pip install -r requirements.txt
+export OPENAI_API_KEY=sk-...
+streamlit run app_public.py
 ```
 
----
+## My role
 
-### 3. Set Your OpenAI API Key
-
-#### Temporary (recommended for demo):
-```bash
-export OPENAI_API_KEY="sk-..."
-```
-
-#### Permanent:
-```bash
-echo 'export OPENAI_API_KEY="sk-..."' >> ~/.zshrc
-source ~/.zshrc
-```
-
----
-
-## ▶️ Running the Dashboard
-
-From inside the project folder:
-
-```bash
-cd amec_dashboard
-streamlit run app.py
-```
-
-Then open:
-
-👉 http://localhost:8501
-
----
-
-## 🧠 How the Agent Works
-
-1. User enters a natural-language question.  
-2. The OpenAI model interprets intent.  
-3. It selects the correct tool using `tool_choice="auto"`.  
-4. It extracts the correct IDs (S001, P002, etc.).  
-5. The Python tool executes using the CSV data.  
-6. The output is returned as structured JSON or a narrative summary.
-
----
-
-## 💬 Best Demo Prompts
-
-These prompts show the tool-calling and analysis clearly:
-
-### 🔥 Risk & Sites
-- “Which site has the highest failure risk and why?”
-- “Evaluate failure on S001.”
-- “Rank all sites from highest to lowest risk.”
-
-### 🔥 Suitability & Deployment
-- “Which site is most suitable for deployment?”
-- “Compare S001 and S003 for suitability.”
-- “What is the best tradeoff between risk and suitability?”
-
-### 🔥 Deliverables & Project Health
-- “Which deliverables are behind for P002?”
-- “Which project is most likely to slip schedule?”
-- “Summarize deliverable risks across the portfolio.”
-
-### 🔥 Director-Level Insights
-- “Give me a deployment recommendation like I’m the AMEC director.”
-- “What should AMEC prioritize this quarter?”
-
----
-
-## 🛠 Troubleshooting
-
-### ❌ API key error  
-Run:
-```bash
-export OPENAI_API_KEY="sk-..."
-```
-
-### ❌ Browser shows a directory instead of UI  
-You're opening a file path — open:
-👉 http://localhost:8501
-
-### ❌ Tools not triggering  
-Enable debugging inside `app.py`:
-```python
-st.write("DEBUG RAW MODEL RESPONSE:", msg)
-```
-
-This reveals whether the LLM attempted a tool call.
+Sole author. I designed the agent's tool schema, the CSV-backed data model, the "inject full table state each turn" approach that keeps the model grounded to real IDs, and the Streamlit interface.
